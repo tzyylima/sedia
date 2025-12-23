@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sedia Aku Sebelum Hujan</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #ffb6c1, #ff69b4 45%, #c71585 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* LOVE */
+.love {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.love span {
+  position: absolute;
+  top: -10%;
+  font-size: 18px;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  to { transform: translateY(120vh); opacity: 0; }
+}
+
+.container {
+  text-align: center;
+  z-index: 2;
+}
+
+button {
+  background: rgba(255,255,255,0.25);
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 12px 36px;
+  border-radius: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.lyric {
+  opacity: 0;
+  margin: 14px 0;
+  font-size: 18px;
+  text-shadow: 0 0 12px rgba(0,0,0,0.5);
+}
+
+.playing .lyric {
+  animation: fadeIn 2.5s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="love" id="love"></div>
+
+<div class="container" id="box">
+  <button onclick="start()">💗 TAP TO START</button>
+
+  <div class="lyric" style="animation-delay:21s">dari waktu itu dingin</div>
+  <div class="lyric" style="animation-delay:24s">ku beri kau hangat</div>
+  <div class="lyric" style="animation-delay:27s">walaupun ku juga beku</div>
+  <div class="lyric" style="animation-delay:30s">tapi ku aman saat kau nyaman</div>
+  <div class="lyric" style="animation-delay:34s">jadi waktu itu panas</div>
+  <div class="lyric" style="animation-delay:38s">kuberi kau angin</div>
+  <div class="lyric" style="animation-delay:41s">walaupun ku juga gerah</div>
+  <div class="lyric" style="animation-delay:44s">tapi ku penuh saat kau teduh</div>
+</div>
+
+<audio id="audio" muted playsinline>
+  <source src="https://tzyylima.github.io/sedia/sedia-aku-sebelum-hujan.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("audio");
+const box = document.getElementById("box");
+
+// autoplay mute
+window.addEventListener("load", () => {
+  audio.play().catch(()=>{});
+});
+
+// user interaction
+function start() {
+  audio.muted = false;
+  audio.play();
+  box.classList.add("playing");
+}
+
+// generate love
+const loveBox = document.getElementById("love");
+for (let i = 0; i < 30; i++) {
+  const s = document.createElement("span");
+  s.textContent = "❤";
+  s.style.left = Math.random()*100+"%";
+  s.style.fontSize = (14+Math.random()*18)+"px";
+  s.style.animationDuration = (5+Math.random()*6)+"s";
+  loveBox.appendChild(s);
+}
+</script>
+
+</body>
+</html>
